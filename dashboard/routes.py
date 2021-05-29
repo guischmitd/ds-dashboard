@@ -1,7 +1,7 @@
 from dashboard import app
 from flask import render_template, url_for, redirect, jsonify
 from datetime import datetime
-from .datautils import data, get_figures
+from .datautils import get_figures
 import plotly
 import json
 
