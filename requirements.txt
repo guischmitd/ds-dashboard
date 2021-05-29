@@ -1,0 +1,5 @@
+flask
+pandas
+plotly
+beautifulsoup4
+requests

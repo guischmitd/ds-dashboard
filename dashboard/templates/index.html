@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <title>BTC Market Dashboard</title>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/build.css"></script>
+    <!-- <script type="text/JavaScript" src="{{url_for('static', filename='index.js')}}" defer></script> -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <a href="#" class="navbar-brand">BTC Market Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://github.com/guischmitd/ds-dashboard"
+                        class="nav-link text-light">Project's Github Page</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://www.cryptodatadownload.com/" class="text-light nav-link">Data Source</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <div class='container p-2 m-2'>
+        <h2>Market History</h2>
+        <div class="row">
+            <div class="col">
+                <h4 class="text-muted" id="last-updated-text">{{ last_updated_text }}</h4>
+            </div>
+            
+            <!-- <div class="col align-content-center">
+                <button type="button" id="refresh-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                        <path fill-rule="evenodd"
+                            d="M8 2.5a5.487 5.487 0 00-4.131 1.869l1.204 1.204A.25.25 0 014.896 6H1.25A.25.25 0 011 5.75V2.104a.25.25 0 01.427-.177l1.38 1.38A7.001 7.001 0 0114.95 7.16a.75.75 0 11-1.49.178A5.501 5.501 0 008 2.5zM1.705 8.005a.75.75 0 01.834.656 5.501 5.501 0 009.592 2.97l-1.204-1.204a.25.25 0 01.177-.427h3.646a.25.25 0 01.25.25v3.646a.25.25 0 01-.427.177l-1.38-1.38A7.001 7.001 0 011.05 8.84a.75.75 0 01.656-.834z">
+                        </path>
+                    </svg>
+                    Refresh
+                </button>
+            </div> -->
+        </div>
+        
+            <div class="row">
+                <div class="col m-2">
+                    <div id={{ids[0]}}></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col m-2">
+                    <div id={{ids[1]}}></div>
+                </div>  
+            </div>
+            <div class="row">
+                <div class="col m-2">
+                    <div id={{ids[2]}}></div>
+                </div>
+                <div class="col m-2">
+                    <div id={{ids[3]}}></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center text-lg-start bg-light text-muted p-2">
+        <a href="https://github.com/guischmitd"><img src="{{url_for('static', filename='assets/githublogo_60x60.png')}}" class="img-fluid m-2"></a>
+        <a href="https://www.linkedin.com/in/guilherme-bara%C3%BAna-schmitd-9503aa98/"><img src="{{url_for('static', filename='assets/linkedinlogo_60x60.png')}}" class="img-fluid m-2"></a>
+        
+    </footer>
+
+    <script type="text/javascript">
+        // plots the figure with id
+        // id much match the div id above in the html
+        var figures = {{figuresJSON | safe}};
+        var ids = {{ids | safe}};
+        for(var i in figures) {
+            Plotly.plot(ids[i],
+                figures[i].data,
+                figures[i].layout || {});
+        }
+    </script>
+</body>
+
+</html>
