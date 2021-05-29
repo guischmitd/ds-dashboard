@@ -25,15 +25,16 @@ data = data.sort_index()
 
 
 def get_figures():
-    # Fig 0 is a candlestick plot of the last 30 days
-    subset = data[data.index[-30 * 24]:]
+    # Fig 0 is a candlestick plot of the last n_days days
+    n_days = 30
+    subset = data[data.index[-n_days * 24]:]
     candle_data = {"x": subset.index.tolist(), 
                    "open": subset['open'].tolist(),
                    "close":subset['close'].tolist(),
                    "high":subset['high'].tolist(),
                    "low":subset['low'].tolist()}
     
-    candle_layout = {"title": 'Full Market History'}
+    candle_layout = {"title": f'Market History <br> (Last {n_days} days)'}
     candle_graph = [go.Candlestick(**candle_data)]
 
     # Fig 1 is a MACD lines plot
