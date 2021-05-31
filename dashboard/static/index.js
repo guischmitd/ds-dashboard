@@ -9,10 +9,3 @@ function RefreshMarketData() {
         document.getElementById("last-updated-text").textContent = data.lastUpdated
     });
 }
-
-let x = 60;
-// Get new data every x seconds
-setInterval(() => {
-    RefreshMarketData();
-}, x * 1000);
-
