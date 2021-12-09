@@ -6,7 +6,6 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv(Path(__file__).parent / 'data/Binance_BTCUSDT_1h.csv')
 
 def ampm_to_24h(timestamp : str) -> str:
     date, time = timestamp.split(' ')
@@ -22,9 +21,10 @@ def ampm_to_24h(timestamp : str) -> str:
     
     return new_ts
 
-data['date'] = pd.to_datetime(data['date'].map(ampm_to_24h))
-data = data.set_index('date')
-data = data.sort_index()
+# data = pd.read_csv(Path(__file__).parent / 'data/Binance_BTCUSDT_1h.csv')
+# data['date'] = pd.to_datetime(data['date'].map(ampm_to_24h))
+# data = data.set_index('date')
+# data = data.sort_index()
 
 
 def update_data():
